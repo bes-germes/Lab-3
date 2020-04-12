@@ -12,7 +12,7 @@ class TwoSideList
     // поле с ключем в узел и, с учетом этого, поменять методы LinkedList
     // (доступ по ключу, поиск по ключу и т.д.)
     struct Node {
-        Node(const ValueType& value, Node* next = nullptr, Node *prev = nullptr); //Готово
+        Node(const ValueType& value, Node* next = nullptr, Node *prev = nullptr); 
         ~Node(); //Готово
 
         void insertNext(const ValueType& value);
@@ -27,37 +27,37 @@ class TwoSideList
 
 public:
     ////
-    TwoSideList(); //Готово------------------
+    TwoSideList(); 
     TwoSideList(const TwoSideList& copyList);
-    TwoSideList& operator=(const TwoSideList& copyList); //Готово
+    TwoSideList& operator=(const TwoSideList& copyList); 
 
     TwoSideList(TwoSideList&& moveList) noexcept; //Готово
-    TwoSideList& operator=(TwoSideList&& moveList) noexcept; //Готово
+    TwoSideList& operator=(TwoSideList&& moveList) noexcept; 
 
     ~TwoSideList(); //Готово
     ////
 
     // доступ к значению элемента по индексу
-    ValueType& operator[](const size_t pos) const; //Готово----------------
+    ValueType& operator[](const size_t pos) const; 
     // доступ к узлу по индексу
-    TwoSideList::Node* getNode(const size_t pos) const; //Готово----------------
+    TwoSideList::Node* getNode(const size_t pos) const; 
 
     // вставка элемента по индексу, сначала ищем, куда вставлять (О(n)), потом вставляем (O(1))
-    void insert(const size_t pos, const ValueType& value); //Готово-------------------
+    void insert(const size_t pos, const ValueType& value); 
     // вставка элемента после узла, (O(1))
-    void insertAfterNode(Node* node, const ValueType& value); //Готово------------------
-    void insertBeforeNode(Node* node, const ValueType& value); //Готово------------
+    void insertAfterNode(Node* node, const ValueType& value); 
+    void insertBeforeNode(Node* node, const ValueType& value); 
     // вставка в конец (О(n))
-    void pushBack(const ValueType& value); //Готово-------------------
+    void pushBack(const ValueType& value); 
     // вставка в начало (О(1))
-    void pushFront(const ValueType& value); //Готово-------------------
+    void pushFront(const ValueType& value);
 
     // удаление
     void remove(const size_t pos);
-    void removeNextNode(Node* node); //Готово-------------------
-    void removePrevNode(Node* node); //Готово-------------------
-    void removeFront(); //Готово-------------------
-    void removeBack(); //Готово-------------------
+    void removeNextNode(Node* node); 
+    void removePrevNode(Node* node); 
+    void removeFront(); 
+    void removeBack(); 
 
     // поиск, О(n)
     long long int findIndex(const ValueType& value) const;
