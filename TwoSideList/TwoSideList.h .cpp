@@ -1,36 +1,42 @@
 #include <cassert>
 #include "TwoSideList.h"
 
-TwoSideList::Node::Node(const ValueType& value, Node* next, Node* prev){
+TwoSideList::Node::Node(const ValueType& value, Node* next, Node* prev)
+{
     this->value = value;
     this->next = next;
     this->prev = prev;
 }
 
-TwoSideList::Node::~Node(){
+TwoSideList::Node::~Node()
+{
     // ничего не удаляем, т.к. агрегация
 }
 
-void TwoSideList::Node::insertNext(const ValueType& value){
+void TwoSideList::Node::insertNext(const ValueType& value)
+{
     Node* newNode = new Node(value, this->next, this);
     this->next->prev = newNode;
     this->next = newNode;
 }
 
-void TwoSideList::Node::insertPrev(const ValueType &value){
+void TwoSideList::Node::insertPrev(const ValueType &value)
+{
     Node* newNode = new Node(value, this, this->prev);
     this->prev->next = newNode;
     this->prev = newNode;
 }
 
-void TwoSideList::Node::removeNext(){
+void TwoSideList::Node::removeNext()
+{
     Node *deleteNode = this->next;
     this->next = deleteNode->next;
     deleteNode->next->prev = this;
     delete deleteNode;
 }
 
-void TwoSideList::Node::removePrev(){
+void TwoSideList::Node::removePrev()
+{
     Node *deleteNode = this->prev;
     this->prev = deleteNode->prev;
     deleteNode->prev->next = this;
@@ -132,7 +138,8 @@ void TwoSideList::insert(const size_t pos, const ValueType& value)
     if (pos < 0) {
         assert(pos < 0);
     }
-    else if (pos >= this->_size) {
+    else if (pos >= this->_size) 
+    {
         assert(pos >= this->_size);
     }
 
@@ -140,7 +147,8 @@ void TwoSideList::insert(const size_t pos, const ValueType& value)
         pushFront(value);
     else if (pos == _size - 1)
         pushBack(value);
-    else {
+    else 
+    {
         int middle = (_size-1)/2;
         bool f = pos/middle;
         if(f)
@@ -150,8 +158,10 @@ void TwoSideList::insert(const size_t pos, const ValueType& value)
     }
 }
 
-void TwoSideList::insertAfterNode(Node* node, const ValueType& value){
-    if(node->next == nullptr){
+void TwoSideList::insertAfterNode(Node* node, const ValueType& value)
+{
+    if(node->next == nullptr)
+    {
         pushBack(value);
     }
     else {
@@ -160,8 +170,10 @@ void TwoSideList::insertAfterNode(Node* node, const ValueType& value){
     }
 }
 
-void TwoSideList::insertBeforeNode(Node* node, const ValueType& value){
-    if(node->prev == nullptr){
+void TwoSideList::insertBeforeNode(Node* node, const ValueType& value)
+{
+    if(node->prev == nullptr)
+    {
         pushFront(value);
     }
     else {
@@ -170,7 +182,8 @@ void TwoSideList::insertBeforeNode(Node* node, const ValueType& value){
     }
 }
 
-void TwoSideList::pushBack(const ValueType& value){
+void TwoSideList::pushBack(const ValueType& value)
+{
 
     Node *n = new Node(value, nullptr, _tail);
     if(_size == 0){
@@ -184,10 +197,12 @@ void TwoSideList::pushBack(const ValueType& value){
     ++_size;
 }
 
-void TwoSideList::pushFront(const ValueType& value){
+void TwoSideList::pushFront(const ValueType& value)
+{
 
     Node *n = new Node(value, _head, nullptr);
-    if(_size == 0){
+    if(_size == 0)
+    {
         _head = n;
         _tail = n;
     }
@@ -198,11 +213,14 @@ void TwoSideList::pushFront(const ValueType& value){
     ++_size;
 }
 
-void TwoSideList::remove(const size_t pos){
-    if (pos < 0) {
+void TwoSideList::remove(const size_t pos)
+{
+    if (pos < 0) 
+    {
         assert(pos < 0);
     }
-    else if (pos >= this->_size) {
+    else if (pos >= this->_size) 
+    {
         assert(pos >= this->_size);
     }
 
@@ -210,7 +228,8 @@ void TwoSideList::remove(const size_t pos){
         removeFront();
     else if (pos == _size - 1)
         removeBack();
-    else {
+    else 
+    {
         int middle = (_size-1)/2;
         bool f = pos/middle;
         if(f)
@@ -220,9 +239,11 @@ void TwoSideList::remove(const size_t pos){
     }
 }
 
-void TwoSideList::removeNextNode(Node* node){
+void TwoSideList::removeNextNode(Node* node)
+{
     if(node->next == nullptr);
-    else if(node->next == _tail){
+    else if(node->next == _tail)
+    {
         removeBack();
     }
     else {
@@ -231,9 +252,11 @@ void TwoSideList::removeNextNode(Node* node){
     }
 }
 
-void TwoSideList::removePrevNode(Node* node){
+void TwoSideList::removePrevNode(Node* node)
+{
     if(node->prev == nullptr);
-    else if(node->prev == _head){
+    else if(node->prev == _head)
+    {
         removeFront();
     }
     else {
@@ -242,7 +265,8 @@ void TwoSideList::removePrevNode(Node* node){
     }
 }
 
-void TwoSideList::removeFront(){
+void TwoSideList::removeFront()
+{
     Node *deleteHead = getNode(0);
     Node *newHead = getNode(1);
     newHead->prev = nullptr;
@@ -251,7 +275,8 @@ void TwoSideList::removeFront(){
     _size--;
 }
 
-void TwoSideList::removeBack(){
+void TwoSideList::removeBack()
+{
     Node *newTail = getNode(_size - 2);
     newTail->next = nullptr;
     Node *deleteTail = getNode(_size - 1);
