@@ -294,10 +294,10 @@ MyVector sortedSquares(const MyVector& vec, bool strategy){
     return vector;
 }
 
-ValueType* Vector::begin(){
+ValueType* MyVector::begin(){
     return _data;
 }
 
-ValueType* Vector::end(){
+ValueType* MyVector::end(){
     return _data + _size;
 }
