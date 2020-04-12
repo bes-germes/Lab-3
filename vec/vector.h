@@ -69,6 +69,10 @@ public:
     void clear();
 
     void pushFront(const ValueType& value);
+    
+    ValueType* begin();
+
+    ValueType* end();
 
     void print();
 private:
