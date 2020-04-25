@@ -50,18 +50,21 @@ size_t MyVector::size() const{
     return  this->_size;
 }
 
-float MyVector::loadFactor(){
-    if(this->_size/this->_capacity > 1){
+float MyVector::loadFactor() {
+
+    if (this->_size / this->_capacity > 1) {
         this->_capacity * this->_coef;
         float k = this->_capacity * this->_coef;
         return k;
     }
-    else if(this->_size/this->_capacity < 1/(this->_coef * this->_coef)){
+    if((this->_size / this->_capacity) < (1 / this->_coef * this->_coef)){
         this->_capacity / this->_coef;
         float k = this->_capacity / this->_coef;
         return k;
     }
 }
+
+
 
 ValueType& MyVector::operator[] (const size_t i) const{
     return _data[i];
@@ -92,12 +95,12 @@ void MyVector::pushFront(const ValueType& value){
 }
 
 void MyVector::insert(const size_t index, const ValueType& value){
-    if(index < 0 || index >= this->_size)
-        assert(index<0 || index >= this->_size);
+    if(index < 0 || index > this->_size)
+        assert(index < 0 || index > this->_size);
     else if(index == 0){
         pushFront(value);
     }
-    else if(index == this->_size - 1){
+    else if(index == this->_size ){
         pushBack(value);
     }
     else if (index < this->_size) {
@@ -113,9 +116,6 @@ void MyVector::insert(const size_t index, const ValueType& value){
         }
         this->_data[this->_size] = a1;
         this->_size++;
-    }
-    else {
-        pushBack(value);
     }
 }
 
@@ -134,7 +134,7 @@ void MyVector::erase( const size_t index){
     if(index < 0)
         assert(index < 0);
     if (index < this->_size) {
-        for (int i = index; i < _size; i++)
+        for (int i = index; i < _size; ++i)
             this->_data[i] = this->_data[i + 1];
         this->_size--;
     }
@@ -200,6 +200,7 @@ void MyVector::resize(const size_t size, const ValueType){
         delete[] this->_data;
         this->_data = new_data;
         this->_size = size;
+        this->_capacity = this->_size;
     }
 }
 
